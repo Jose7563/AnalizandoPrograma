@@ -1,8 +1,7 @@
 package nuevo;
 
+import java.util.Random;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 public class Matriz {
 
@@ -11,18 +10,19 @@ public class Matriz {
 	public static void main(String[] args) {
 
 		int[][] matriz = { { 1, 2, 3 }, { 1, 2, 3 }, { 4, 7, 9 } };
-		
-		System.out.println("Matriz de "+matriz.length+" filas y "+matriz[0].length+" columnas.");
-		mostrarMatriz(matriz);
-		System.out.println();	
-		mostrarIdentidad(4,4);
-		System.out.println();
-		mostrarIdentidadInversa(4, 4);
-		System.out.println();
-		mostrarMatriz(mostrarMatrizTriagularSuperior(9, 9));
-		System.out.println();
-		mostrarMatriz(mostrarMatrizTriagularInferior(9, 9));
 
+		System.out.println("Matriz de " + matriz.length + " filas y " + matriz[0].length + " columnas.");
+		mostrarMatriz(matriz);
+		System.out.println("Matriz Identidad");
+		mostrarIdentidad(4, 4);
+		System.out.println("Matriz Identidad inversa");
+		mostrarIdentidadInversa(4, 4);
+		System.out.println("Matriz Triangular Superior");
+		mostrarMatriz(mostrarMatrizTriagularSuperior(9, 9));
+		System.out.println("Matriz Triangular Inferior");
+		mostrarMatriz(mostrarMatrizTriagularInferior(9, 9));
+		System.out.println("Matriz aleatorio con diagonal 20 ");
+		mostrarMatriz(mostrarMatrizAleatorioDiagonal20(9,9,8));
 	}
 
 	/**
@@ -47,6 +47,7 @@ public class Matriz {
 			}
 			System.out.println();
 		}
+		
 	}
 
 	/**
@@ -67,6 +68,7 @@ public class Matriz {
 			pos++;
 			System.out.println();
 		}
+		
 	}
 
 	/**
@@ -89,6 +91,7 @@ public class Matriz {
 			pos--;
 			System.out.println();
 		}
+	
 	}
 
 	/**
@@ -136,4 +139,23 @@ public class Matriz {
 
 		return mat;
 	}
+
+	public static int[][] mostrarMatrizAleatorioDiagonal20(int fila, int columna,int numeroFinAleatorio) {
+
+		int[][] mat = new int[fila][columna];
+		int pos = 0;
+		Random generador = new Random();
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat[i].length; j++) {
+				if (j == pos)
+					mat[i][j] = 20;
+				else
+					mat[i][j] = generador.nextInt(numeroFinAleatorio);
+			}
+			pos++;
+		}
+
+		return mat;
+	}
+
 }

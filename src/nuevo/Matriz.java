@@ -11,20 +11,37 @@ public class Matriz {
 
 		int[][] matriz = { { 1, 2, 3 }, { 1, 2, 3 }, { 4, 7, 9 } };
 
-		System.out.println("Matriz de " + matriz.length + " filas y " + matriz[0].length + " columnas.");
-		mostrarMatriz(matriz);
-		System.out.println("Matriz Identidad");
-		mostrarIdentidad(4, 4);
-		System.out.println("Matriz Identidad inversa");
-		mostrarIdentidadInversa(4, 4);
-		System.out.println("Matriz Triangular Superior");
-		mostrarMatriz(mostrarMatrizTriagularSuperior(9, 9));
-		System.out.println("Matriz Triangular Inferior");
-		mostrarMatriz(mostrarMatrizTriagularInferior(9, 9));
-		System.out.println("Matriz aleatorio con diagonal 20 ");
-		mostrarMatriz(mostrarMatrizAleatorioDiagonal20(9,9,8));
+//		System.out.println("Matriz de " + matriz.length + " filas y " + matriz[0].length + " columnas.");
+//		mostrarMatriz(matriz);
+//		System.out.println("Matriz Identidad");
+//		crearMatrizIdentidad(4, 4);
+//		System.out.println("Matriz Identidad inversa");
+//		crearMatrizIdentidadInversa(4, 4);
+//		System.out.println("Matriz Triangular Superior");
+//		mostrarMatriz(crearMatrizTriagularSuperior(9, 9));
+//		System.out.println("Matriz Triangular Inferior");
+//		mostrarMatriz(crearMatrizTriagularInferior(9, 9));
+//		System.out.println("Matriz aleatorio con diagonal 20 ");
+//		mostrarMatriz(crearMatrizAleatorioDiagonal20(9, 9, 8));
+//		System.out.println("Matriz escalera: ");
+//		crearMatrizEscalera(9, 9);
+//		System.out.println("Suma de Matrices : ");
+//		mostrarMatriz(sumaMatrices(matriz, matriz));
+//		System.out.println("Matriz escalera  : ");
+//		mostrarMatriz(crearMatrizEsacaleraString(4, 4));
+//		System.out.println("Matriz Abecedario :"); //String.valueOf((char) 90)
+//		mostrarMatriz(crearAbecedarioMayusculas(6, 5));
+//		 String str3 = "name";
+//		 String st = new String("name");
+//		 System.out.println( str3.equals(st)?"si":"no");
+//		 int d =Character.digit('4',5);
+//		 System.out.println(d);
+		 
+		 String reg="\\d+";
+		 String digit="3i";
+		 System.out.println(digit.matches(reg)?"si cumple":"no cumple+");
+		 
 	}
-
 	/**
 	 * Método que inserta datos en una matriz[][] de valores enteros ya definida
 	 **/
@@ -47,14 +64,14 @@ public class Matriz {
 			}
 			System.out.println();
 		}
-		
+
 	}
 
 	/**
 	 * Método que crea una matriz[][] identidad .Se tiene que asignar como
 	 * parametros las filas y columnas valores enteros
 	 */
-	public static void mostrarIdentidad(int fila, int columna) {
+	public static void crearMatrizIdentidad(int fila, int columna) {
 		int[][] mat = new int[fila][columna];
 		int pos = 0;
 		for (int i = 0; i < mat.length; i++) {
@@ -68,7 +85,7 @@ public class Matriz {
 			pos++;
 			System.out.println();
 		}
-		
+
 	}
 
 	/**
@@ -76,7 +93,7 @@ public class Matriz {
 	 * izquierda .Se tiene que asignar como parametros las filas y columnas valores
 	 * enteros
 	 */
-	public static void mostrarIdentidadInversa(int fila, int columna) {
+	public static void crearMatrizIdentidadInversa(int fila, int columna) {
 		int[][] mat = new int[fila][columna];
 		int pos = mat[0].length - 1;
 		for (int i = 0; i < mat.length; i++) {
@@ -91,7 +108,7 @@ public class Matriz {
 			pos--;
 			System.out.println();
 		}
-	
+
 	}
 
 	/**
@@ -99,7 +116,7 @@ public class Matriz {
 	 * valores restantes de las matriz se completa con ceros .Se tiene que asignar
 	 * como parametros las filas y columnas valores enteros
 	 */
-	public static int[][] mostrarMatrizTriagularSuperior(int fila, int columna) {
+	public static int[][] crearMatrizTriagularSuperior(int fila, int columna) {
 
 		int[][] mat = new int[fila][columna];
 		int pos = 0;
@@ -121,7 +138,7 @@ public class Matriz {
 	 * valores restantes de las matriz se completa con uno .Se tiene que asignar
 	 * como parametros las filas y columnas valores enteros
 	 */
-	public static int[][] mostrarMatrizTriagularInferior(int fila, int columna) {
+	public static int[][] crearMatrizTriagularInferior(int fila, int columna) {
 
 		int[][] mat = new int[fila][columna];
 		int pos = 0;
@@ -140,7 +157,7 @@ public class Matriz {
 		return mat;
 	}
 
-	public static int[][] mostrarMatrizAleatorioDiagonal20(int fila, int columna,int numeroFinAleatorio) {
+	public static int[][] crearMatrizAleatorioDiagonal20(int fila, int columna, int numeroFinAleatorio) {
 
 		int[][] mat = new int[fila][columna];
 		int pos = 0;
@@ -156,6 +173,84 @@ public class Matriz {
 		}
 
 		return mat;
+	}
+
+	/***/
+	public static void crearMatrizEscalera(int fila, int columna) {
+		int[][] mat = new int[fila][columna];
+		int pos = 0;
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat[i].length; j++) {
+				if (j == pos)
+					mat[i][j] = pos + 1;
+				else
+					mat[i][j] = 0;
+				System.out.print(mat[i][j] + " ");
+			}
+			pos++;
+			System.out.println();
+		}
+
+	}
+
+	public static int[][] sumaMatrices(int[][] mat, int[][] pat) {
+		int[][] matrix = new int[3][3];
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat[i].length; j++) {
+				matrix[i][j] = mat[i][j] + pat[i][j];
+			}
+		}
+		return matrix;
+	}
+
+	public static void mostrarMatriz(String[][] mat) {
+
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat[i].length; j++) {
+				System.out.print(mat[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+	}
+
+	public static String[][] crearMatrizEsacaleraString(int fila, int columna) {
+
+		String[][] mat = new String[fila][columna];
+		int pos = 0;
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat[i].length; j++) {
+
+				if (j == pos)
+					mat[i][j] = (pos + 1) + "";
+				else
+					mat[i][j] = "A";
+			}
+			pos++;
+		}
+		return mat;
+
+	}
+
+	/***/
+	public static String[][] crearAbecedarioMayusculas(int fila, int columna) {
+
+		String[][] mat = new String[fila][columna];
+		int pos = 65;
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat[i].length; j++) {
+				if (pos <= 90) {
+					// n 78
+					mat[i][j] = String.valueOf((char) pos);
+					pos++;
+				} else
+					mat[i][j] = "";
+
+			}
+
+		}
+		return mat;
+
 	}
 
 }

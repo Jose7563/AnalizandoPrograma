@@ -242,13 +242,9 @@ public class Factura2 extends JFrame implements ActionListener {
 	private void codigoBoletaAutoIncremental() {
 		int numero = 0;
 
-		if (numero > 9) {
-			numero = Integer.parseInt(txtBoleta.getText().substring(7)) + 1;
-			txtBoleta.setText("BOLT-00" + numero);
-		} else {
-			numero = Integer.parseInt(txtBoleta.getText().substring(8)) + 1;
-			txtBoleta.setText("BOLT-000" + numero);
-		}
+		numero = Integer.parseInt(txtBoleta.getText().substring(8)) + 1;
+
+		txtBoleta.setText("BOLT-000" + numero);
 
 	}
 

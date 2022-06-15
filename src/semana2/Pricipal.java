@@ -1,4 +1,4 @@
-package nuevo;
+package semana2;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -26,7 +26,6 @@ public class Pricipal extends JFrame implements ActionListener {
 	private JTextField txtCantidad;
 	private JTextField txtPrecio;
 	private JButton btnGrabar;
-	private JButton btnPrimero;
 
 	private int[] codigo = new int[10]; // {1,2,4,5};
 	private String[] producto = new String[10];// {"re","fe","gr","tr"} ;
@@ -45,6 +44,7 @@ public class Pricipal extends JFrame implements ActionListener {
 	private JButton btnBuscar;
 	private JButton btnLimpiar;
 	private JButton btnmodificar;
+	private JButton btnPrimerElemnto;
 
 	/**
 	 * Launch the application.
@@ -74,7 +74,7 @@ public class Pricipal extends JFrame implements ActionListener {
 	 */
 	public Pricipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 465, 350);
+		setBounds(100, 100, 480, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -115,14 +115,9 @@ public class Pricipal extends JFrame implements ActionListener {
 		btnBuscar.setBounds(273, 125, 89, 23);
 		contentPane.add(btnBuscar);
 
-		btnPrimero = new JButton("Primero");
-		btnPrimero.addActionListener(this);
-		btnPrimero.setBounds(10, 258, 89, 23);
-		contentPane.add(btnPrimero);
-
 		btnNewButton = new JButton(" <-");
 		btnNewButton.addActionListener(this);
-		btnNewButton.setBounds(120, 258, 89, 23);
+		btnNewButton.setBounds(136, 258, 89, 23);
 		contentPane.add(btnNewButton);
 
 		btnNewButton_1 = new JButton(" ->");
@@ -132,7 +127,7 @@ public class Pricipal extends JFrame implements ActionListener {
 
 		btnNewButton_2 = new JButton("Ultimo");
 		btnNewButton_2.addActionListener(this);
-		btnNewButton_2.setBounds(345, 258, 89, 23);
+		btnNewButton_2.setBounds(351, 258, 89, 23);
 		contentPane.add(btnNewButton_2);
 
 		lblNewLabel_1 = new JLabel("Codigo :");
@@ -156,13 +151,21 @@ public class Pricipal extends JFrame implements ActionListener {
 		btnLimpiar.setBounds(273, 161, 89, 23);
 		contentPane.add(btnLimpiar);
 		
-		btnmodificar = new JButton("New button");
+		btnmodificar = new JButton("Modificar");
 		btnmodificar.addActionListener(this);
 		btnmodificar.setBounds(273, 196, 89, 23);
 		contentPane.add(btnmodificar);
+		
+		btnPrimerElemnto = new JButton("Primero");
+		btnPrimerElemnto.addActionListener(this);
+		btnPrimerElemnto.setBounds(21, 258, 89, 23);
+		contentPane.add(btnPrimerElemnto);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnPrimerElemnto) {
+			do_btnPrimerElemnto_actionPerformed(e);
+		}
 		if (e.getSource() == btnmodificar) {
 			do_btnmodificar_actionPerformed(e);
 		}
@@ -320,5 +323,8 @@ public class Pricipal extends JFrame implements ActionListener {
 		cantidad[indice] = Integer.valueOf(txtCantidad.getText());
 		precio[indice] = Double.valueOf(txtPrecio.getText());
 		limpiar();
+	}
+	protected void do_btnPrimerElemnto_actionPerformed(ActionEvent e) {
+		llenadoDatos(0);
 	}
 }

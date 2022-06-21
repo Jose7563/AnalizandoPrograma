@@ -26,9 +26,27 @@ public class ExpresionRegulares {
 		Matcher matcher = pattern.matcher("L528");
 
 		// boolean matchFound = matcher.find();
-		System.out.println(matcher.find() ? "si cumple" : "no cumple");
+		//System.out.println(matcher.find() ? "si cumple" : "no cumple");
 
+		// ruc
+		Pattern pRuc = Pattern.compile("\\d{11}");
+		// codigo
+		Pattern pCodigo = Pattern.compile("[a-zA-Z[0-9]]{2,}");//
+		//cantidad
+		Pattern pCantidad = Pattern.compile("\\d{1,}");
+		// producto
+		Pattern pProducto = Pattern.compile("[a-zA-Z]{2,}");
+		//precio "\\d+([\\.]\\d+)"
+		
+		Pattern pPrecio = Pattern.compile("\\d+([\\.]\\d+)"); // otra forma  -> "[0-9]+([\\.][0-9]+)" "\\d+\\.\\d+"
+	     Matcher mat = pPrecio.matcher("140.44");  
+		
+		System.out.println( mat.matches()? "verdad": "falso");
+		
 		// System.out.println("/");//Pattern.matches("\\s"," ")?"si cumple(metodo)":"no
 		// cumple(metodo)");
+		
+		
 	}
+	
 }

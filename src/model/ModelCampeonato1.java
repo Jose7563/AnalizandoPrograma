@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +9,8 @@ import java.util.List;
 
 import Utilidad.MiConexion;
 import Utilidad.Util;
-import entidad.Campeonato;
 import entidad.Campeonato1;
+import entidad.Usuario;
 
 public class ModelCampeonato1 {
 
@@ -74,7 +73,6 @@ public class ModelCampeonato1 {
 		}
 		return actualizados;
 	}
-
 	public List<Campeonato1> listaCampeonato() {
 		List<Campeonato1> data = new ArrayList<Campeonato1>();
 		Connection con = null;
@@ -109,42 +107,76 @@ public class ModelCampeonato1 {
 		}
 		return data;
 	}
+	public List<Usuario> listaUsuarios() {
+		List<Usuario> data = new ArrayList<Usuario>();
+		Connection con = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			con = new MiConexion().getConexion();
+			String sql = "SELECT c.usuario, c.clave FROM usuarios c";
+			pstm = con.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			Usuario c = null;
+			while (rs.next()) {
+
+				c = new Usuario();
+				c.setUsuario(rs.getString("usuario"));
+				c.setClave(rs.getString("clave"));
+				
+				data.add(c);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return data;
+	}
 	
-//	public List<Campeonato> listaFiltro(String campo, String texto) {
-//		List<Campeonato> data = new ArrayList<Campeonato>();
-//		Connection con = null;
-//		PreparedStatement pstm = null;
-//		ResultSet rs = null;
-//		try {
-//			con = new MiConexion().getConexion();
-//
-//			String sql = "SELECT idCampeonato,nombre ,anio FROM campeonato1 where "+campo+" LIKE '%"+texto+"%'";
-//			pstm = con.prepareStatement(sql);
-//			rs = pstm.executeQuery();
-//			Campeonato c = null;
-//			while (rs.next()) {
-//
-//				c = new Campeonato();
-//				c.setIdcampeonato(rs.getInt("idCampeonato"));
-//				c.setDescripcion(rs.getString("nombre"));
-//				c.setAnio(rs.getInt("año"));
-//				data.add(c);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				if (pstm != null)
-//					pstm.close();
-//				if (con != null)
-//					con.close();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return data;
-//	}
-//	
+	public List<Campeonato1> listaFiltro(String campo, String texto) {
+		List<Campeonato1> data = new ArrayList<Campeonato1>();
+		Connection con = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			con = new MiConexion().getConexion();
+
+			String sql = "SELECT idCampeonato,nombre ,anio,fecha FROM campeonato_one where "+campo+" LIKE '%"+texto+"%'";
+			pstm = con.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			Campeonato1 c = null;
+			while (rs.next()) {
+
+				c = new Campeonato1();
+				c.setIdcampeonato(rs.getInt("idCampeonato"));
+				c.setDescripcion(rs.getString("nombre"));
+				c.setAnio(rs.getInt("anio"));
+				c.setFecha(rs.getDate("fecha"));
+				data.add(c);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return data;
+	}
+	
 	
 	public List<Campeonato1> listaFiltroBetween(String  fechaInicio, String  fechaFin) {
 		List<Campeonato1> data = new ArrayList<Campeonato1>();

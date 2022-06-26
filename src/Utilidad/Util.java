@@ -1,13 +1,15 @@
 package Utilidad;
 
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,6 +18,16 @@ import com.toedter.calendar.JDateChooser;
 
 public class Util {
 
+	public  Icon icono(String path) {
+	String ruta="/src/imagenes/"+path;
+		Icon img = new ImageIcon(new ImageIcon(getClass().getResource(ruta)).getImage().getScaledInstance(40,40,java.awt.Image.SCALE_SMOOTH));
+		
+		return img;
+	}
+	
+	public static void mensaje(String mensaje, Icon icon) {
+		JOptionPane.showMessageDialog(null, mensaje,"",JOptionPane.PLAIN_MESSAGE ,icon);
+	}
 	public static void limpiarCajaTexto(JTextField textField) {
 		textField.setText("");
 	}

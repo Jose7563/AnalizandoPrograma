@@ -88,48 +88,48 @@ public class Practica extends JFrame implements ActionListener {
 
 		lblNewLabel_1 = new JLabel("Codigo");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNewLabel_1.setBounds(21, 211, 46, 14);
+		lblNewLabel_1.setBounds(20, 151, 46, 14);
 		contentPane.add(lblNewLabel_1);
 
 		lblNewLabel_2 = new JLabel("Producto :");
-		lblNewLabel_2.setBounds(126, 211, 74, 14);
+		lblNewLabel_2.setBounds(129, 151, 74, 14);
 		contentPane.add(lblNewLabel_2);
 
 		lblNewLabel_3 = new JLabel("Precio : ");
-		lblNewLabel_3.setBounds(228, 211, 74, 14);
+		lblNewLabel_3.setBounds(228, 151, 74, 14);
 		contentPane.add(lblNewLabel_3);
 
 		lblNewLabel_4 = new JLabel("Cantidad :");
-		lblNewLabel_4.setBounds(345, 211, 57, 14);
+		lblNewLabel_4.setBounds(332, 151, 57, 14);
 		contentPane.add(lblNewLabel_4);
 
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(21, 224, 86, 20);
+		txtCodigo.setBounds(20, 176, 86, 20);
 		contentPane.add(txtCodigo);
 		txtCodigo.setColumns(10);
 
 		txtProducto = new JTextField();
-		txtProducto.setBounds(129, 224, 86, 20);
+		txtProducto.setBounds(129, 176, 86, 20);
 		contentPane.add(txtProducto);
 		txtProducto.setColumns(10);
 
 		txtPrecio = new JTextField();
-		txtPrecio.setBounds(228, 224, 86, 20);
+		txtPrecio.setBounds(228, 176, 86, 20);
 		contentPane.add(txtPrecio);
 		txtPrecio.setColumns(10);
 
 		txtCantidad = new JTextField();
-		txtCantidad.setBounds(332, 224, 86, 20);
+		txtCantidad.setBounds(332, 176, 86, 20);
 		contentPane.add(txtCantidad);
 		txtCantidad.setColumns(10);
 
 		btnGuardar = new JButton("Agregar");
 		btnGuardar.addActionListener(this);
-		btnGuardar.setBounds(548, 286, 89, 23);
+		btnGuardar.setBounds(548, 209, 89, 23);
 		contentPane.add(btnGuardar);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 255, 517, 193);
+		scrollPane.setBounds(20, 219, 517, 193);
 		contentPane.add(scrollPane);
 
 		model = new DefaultTableModel(null, titulos);
@@ -143,7 +143,7 @@ public class Practica extends JFrame implements ActionListener {
 
 		btnCalcular = new JButton("Calcular");
 		btnCalcular.addActionListener(this);
-		btnCalcular.setBounds(548, 330, 89, 23);
+		btnCalcular.setBounds(548, 258, 89, 23);
 		contentPane.add(btnCalcular);
 
 		lblNewLabel_5 = new JLabel("Cliente :");
@@ -186,9 +186,9 @@ public class Practica extends JFrame implements ActionListener {
 		contentPane.add(txtTelefono);
 		txtTelefono.setColumns(10);
 
-		lblNewLabel_9 = new JLabel("Boleta :");
+		lblNewLabel_9 = new JLabel("FACTURA :");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_9.setBounds(426, 30, 74, 14);
+		lblNewLabel_9.setBounds(359, 30, 129, 14);
 		contentPane.add(lblNewLabel_9);
 
 		txtBoleta = new JTextField();
@@ -198,7 +198,7 @@ public class Practica extends JFrame implements ActionListener {
 
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.addActionListener(this);
-		btnNuevo.setBounds(548, 240, 89, 23);
+		btnNuevo.setBounds(548, 175, 89, 23);
 		contentPane.add(btnNuevo);
 
 		codigoBoleta();
@@ -241,7 +241,19 @@ public class Practica extends JFrame implements ActionListener {
 		txtProducto.setText("");
 		txtPrecio.setText("");
 		txtCantidad.setText("");
+		txtCodigo.requestFocus();
 
+	}
+	private void limpiarTodasCajas() {
+		txtCliente.setText("");
+		txtDireccion.setText("");
+		txtTelefono.setText("");
+		txtRuc.setText("");
+		txtCodigo.setText("");
+		txtProducto.setText("");
+		txtPrecio.setText("");
+		txtCantidad.setText("");
+		txtCliente.requestFocus();
 	}
 
 	private void codigoBoleta() {
@@ -260,34 +272,39 @@ public class Practica extends JFrame implements ActionListener {
 
 	protected void do_btnCalcular_actionPerformed(ActionEvent e) {
 
-		String[] subtotales = new String[5];
-
-		igv = subtotal * 0.18;
-		total = subtotal + igv;
-		subtotales[0] = "";
-		subtotales[1] = "";
-		subtotales[2] = "";
-		subtotales[3] = "SUBTOTAL :";
-		subtotales[4] = "$ " + subtotal;
-		model.addRow(subtotales);
-		subtotales[0] = "";
-		subtotales[1] = "";
-		subtotales[2] = "";
-		subtotales[3] = "IGV :";
-		subtotales[4] = "$ " + igv;
-		model.addRow(subtotales);
-		subtotales[0] = "";
-		subtotales[1] = "";
-		subtotales[2] = "";
-		subtotales[3] = "TOTAL  :";
-		subtotales[4] = "$ " + total;
-		model.addRow(subtotales);
-		// tblDatos.setModel(model);
+		if(tblDatos.getModel().getRowCount()>0) {
+			String[] subtotales = new String[5];
+			igv = subtotal * 0.18;
+			total = subtotal + igv;
+			subtotales[0] = "";
+			subtotales[1] = "";
+			subtotales[2] = "";
+			subtotales[3] = "SUBTOTAL :";
+			subtotales[4] = "$ " + subtotal;
+			model.addRow(subtotales);
+			subtotales[0] = "";
+			subtotales[1] = "";
+			subtotales[2] = "";
+			subtotales[3] = "IGV :";
+			subtotales[4] = "$ " + igv;
+			model.addRow(subtotales);
+			subtotales[0] = "";
+			subtotales[1] = "";
+			subtotales[2] = "";
+			subtotales[3] = "TOTAL  :";
+			subtotales[4] = "$ " + total;
+			model.addRow(subtotales);
+			// tblDatos.setModel(model);
+		}else {
+			JOptionPane.showMessageDialog(null, "No existen valores para calcular");
+		}
+		
+		
 	}
 
 	protected void do_btnNuevo_actionPerformed(ActionEvent e) {
 		codigoBoletaAutoIncremental();
-		limpiar();
+		limpiarTodasCajas();
 	}
 
 	public String quitarEspacios(JTextField text) {
@@ -295,48 +312,58 @@ public class Practica extends JFrame implements ActionListener {
 	}
 
 	public boolean validar() {
-
+		
 		Pattern pRuc = Pattern.compile("\\d{11}");
 		Matcher mRuc = pRuc.matcher(quitarEspacios(txtRuc));
-
+		//telefono
+		Pattern pTelefono = Pattern.compile("\\d{9}");
+		Matcher mTelefono = pTelefono.matcher(quitarEspacios(txtTelefono));
 		// codigo
 		Pattern pCodigo = Pattern.compile("[a-zA-Z[0-9]]{2,}");
 		Matcher mCodigo = pCodigo.matcher(quitarEspacios(txtCodigo));
 		//cantidad
-		Pattern pCantidad = Pattern.compile("\\d{1,}");
+		Pattern pCantidad = Pattern.compile("[1-9]{1,}");
 		Matcher mCantidad = pCantidad.matcher(quitarEspacios(txtCantidad));
 		// producto
 		Pattern pProducto = Pattern.compile("[a-zA-Z]{2,}");
 		Matcher mProducto = pProducto.matcher(quitarEspacios(txtProducto));
 		//precio 
-		Pattern pPrecio = Pattern.compile("\\d+([\\.]\\d+)");
+		Pattern pPrecio = Pattern.compile("\\d+([\\.]\\d+)?");
 		Matcher mPrecio = pPrecio.matcher(quitarEspacios(txtPrecio));
 
 		if (!mRuc.matches()) {
 			txtRuc.setText("");
-			JOptionPane.showMessageDialog(null, "El campo solo acepta 11 digitos ");
+			JOptionPane.showMessageDialog(null, "El campo ruc solo acepta 11 digitos ");
 			return false;
-		}
-		else if(!mCodigo.matches()) {
+		}else if(quitarEspacios(txtCliente).equals("") || quitarEspacios(txtCliente) == null ) {
+			txtCliente.setText("");
+			JOptionPane.showMessageDialog(null, "El campo cliente debe tener texto");
+			return false;
+		}else if(quitarEspacios(txtDireccion).equals("") || quitarEspacios(txtDireccion) == null ) {
+			txtDireccion.setText("");
+			JOptionPane.showMessageDialog(null, "El campo direccion debe tener texto");
+			return false;
+		}else if(!mTelefono.matches()) {
+			txtTelefono.setText("");
+			JOptionPane.showMessageDialog(null, "El campo telefono solo numero de telefono de 9 digitos");
+			return false;
+		}else if(!mCodigo.matches()) {
 			txtCodigo.setText("");
-			JOptionPane.showMessageDialog(null, "El campo solo acepta valores alfanuericos");
+			JOptionPane.showMessageDialog(null, "El campo codigo solo acepta valores alfanumericos");
 			return false;
 		}else if(!mCantidad.matches()) {
 			txtCantidad.setText("");
-			JOptionPane.showMessageDialog(null, "El campo solo acepta numeros enteros y positivos");
+			JOptionPane.showMessageDialog(null, "El campo cantidad solo acepta numeros enteros y positivos");
 			return false;
 		}else if(!mProducto.matches()) {
 			txtProducto.setText("");
-			JOptionPane.showMessageDialog(null, "El campo solo acepta valores de a hasta z ");
+			JOptionPane.showMessageDialog(null, "El campo producto solo acepta valores de a hasta z ");
 			return false;
 		}else if(!mPrecio.matches()) {
 			txtPrecio.setText("");
-			JOptionPane.showMessageDialog(null, "El campo solo acepta numeros enteros o decimales ");
+			JOptionPane.showMessageDialog(null, "El campo precio solo acepta numeros enteros o decimales ");
 			return false;
-		}
-
-
-		else {
+		}else {
 			return true;
 		}
 	}

@@ -38,7 +38,7 @@ public class ExpresionRegulares {
 		Pattern pProducto = Pattern.compile("[a-zA-Z]{2,}");
 		//precio "\\d+([\\.]\\d+)"
 		
-		Pattern pPrecio = Pattern.compile("\\d+([\\.]\\d+)"); // otra forma  -> "[0-9]+([\\.][0-9]+)" "\\d+\\.\\d+"
+		Pattern pPrecio = Pattern.compile("\\d+([\\.]\\d+)?"); // otra forma  -> "[0-9]+([\\.][0-9]+)" "\\d+\\.\\d+"
 	     Matcher mat = pPrecio.matcher("140.44");  
 		
 		System.out.println( mat.matches()? "verdad": "falso");

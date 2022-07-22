@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import entidad.Campeonato;
+import entidad.LIbro;
 import model.ModelCampeonato;
 
 import javax.swing.JTextField;

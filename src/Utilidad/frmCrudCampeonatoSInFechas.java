@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
-import entidad.Campeonato;
+import entidad.LIbro;
 import entidad.Campeonato1;
 import model.ModelCampeonato;
 
@@ -174,13 +174,13 @@ public class frmCrudCampeonatoSInFechas extends JFrame implements ActionListener
 
 	}
 
-	public void listadoCampeonato( List<Campeonato> list) {
-		List<Campeonato> data = list;
+	public void listadoCampeonato( List<LIbro> list) {
+		List<LIbro> data = list;
 		
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
 
-		for (Campeonato c : data) {
+		for (LIbro c : data) {
 			Object[] fila = { c.getIdcampeonato(), c.getDescripcion(), c.getAnio()};
 			dtm.addRow(fila);
 		}
@@ -228,7 +228,7 @@ public class frmCrudCampeonatoSInFechas extends JFrame implements ActionListener
 		String des = txtDes.getText(); 
 		String anio = txtAnio.getText(); 
 		
-		Campeonato c = new Campeonato(); 
+		LIbro c = new LIbro(); 
 		c.setDescripcion(des);
 		c.setAnio(Integer.parseInt(anio));
 		c.setIdcampeonato(idSeleccionado);
@@ -262,11 +262,11 @@ public class frmCrudCampeonatoSInFechas extends JFrame implements ActionListener
 	
 	protected void do_btnBuscarFechas_actionPerformed(ActionEvent e) {
 		
-		
+		/*
 		int anio=2021;
 		int anio2=2022;
 		listadoCampeonato(mod.listaFiltroBetween(anio, anio2));
-	
+	*/
 		//System.out.print(Util.fechaDiaMesAnio(dateChooser.getDate()));
 	
 		

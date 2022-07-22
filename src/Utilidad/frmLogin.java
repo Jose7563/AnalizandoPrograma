@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -76,11 +77,11 @@ public class frmLogin extends JFrame implements ActionListener {
 			do_btnLogin_actionPerformed(e);
 		}
 	}
-
+	int contador = 0;
 	protected void do_btnLogin_actionPerformed(ActionEvent e) {
-
-		List<Usuario> usuarios= mod.listaUsuarios();
-		for(Usuario u : usuarios) {
+		
+		List<Usuario> usuarios = mod.listaUsuarios();
+		for (Usuario u : usuarios) {
 			if (txtUsuario.getText().trim().equals(u.getUsuario())
 					&& String.valueOf(txtPassword.getPassword()).trim().equals(u.getClave())) {
 
@@ -90,7 +91,14 @@ public class frmLogin extends JFrame implements ActionListener {
 				this.setVisible(false);
 			}
 		}
-		
+
+		contador++;
+		System.out.println(contador);
+		if (contador == 3) {
+			JOptionPane.showMessageDialog(null, "Tuvo " + contador + " intentos erroneos. ");
+
+			System.exit(0);
+		}
 		
 
 	}

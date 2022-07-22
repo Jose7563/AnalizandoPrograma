@@ -140,7 +140,34 @@ public class ModelCampeonato1 {
 		}
 		return data;
 	}
-	
+	public List<String> listaCombo() {
+		List<String> data = new ArrayList<String>();
+		Connection con = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			con = new MiConexion().getConexion();
+			String sql = "SELECT nombre FROM campeonato_one";
+			pstm = con.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				data.add(rs.getString("nombre"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return data;
+	}
 	public List<Campeonato1> listaFiltro(String campo, String texto) {
 		List<Campeonato1> data = new ArrayList<Campeonato1>();
 		Connection con = null;

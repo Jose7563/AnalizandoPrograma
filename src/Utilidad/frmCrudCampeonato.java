@@ -58,6 +58,7 @@ public class frmCrudCampeonato extends JFrame implements ActionListener, MouseLi
 	private JLabel lblNewLabel_4;
 	private JLabel lblNRegistros;
 	private JButton btnResetFechasYTabla;
+	private JComboBox<String> cboNombre;
 
 	/**
 	 * Launch the application.
@@ -134,7 +135,7 @@ public class frmCrudCampeonato extends JFrame implements ActionListener, MouseLi
 		contentPane.add(lblNewLabel_2);
 
 		cboFiltro = new JComboBox();
-		cboFiltro.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "Año"}));
+		cboFiltro.setModel(new DefaultComboBoxModel(new String[] { "Nombre", "Año" }));
 		cboFiltro.setBounds(33, 159, 121, 22);
 		contentPane.add(cboFiltro);
 
@@ -177,29 +178,38 @@ public class frmCrudCampeonato extends JFrame implements ActionListener, MouseLi
 		lblNRegistros = new JLabel("");
 		lblNRegistros.setBounds(300, 432, 140, 14);
 		contentPane.add(lblNRegistros);
-		
+
 		btnResetFechasYTabla = new JButton("Reset");
 		btnResetFechasYTabla.addActionListener(this);
 		btnResetFechasYTabla.setBounds(416, 187, 89, 23);
 		contentPane.add(btnResetFechasYTabla);
 
+		cboNombre = new JComboBox();
+		cboNombre.setBounds(416, 25, 89, 22);
+		contentPane.add(cboNombre);
+
 		listadoInicial();
+		listadoCombo();
+	}
+
+	public void listadoCombo() {
+		for (String co : mod.listaCombo()) {
+			cboNombre.addItem(co);
+		}
 	}
 
 	public void listadoInicial() {
 
-		List<Campeonato1> listadoCam = null;
-		listadoCam = mod.listaCampeonato();
-		int numeroRegistros = listadoCam.size();
-		listadoCampeonato(listadoCam);
-		mostrarNumeroRegistrosTabla(lblNRegistros, numeroRegistros);
+	
+		listadoCampeonato(mod.listaCampeonato());
+		
 
 	}
 
 	public void limpiarCalendar(JDateChooser txtFecha) {
-		JDateChooser fecha= txtFecha;
+		JDateChooser fecha = txtFecha;
 		fecha.setCalendar(null);
-	
+
 	}
 
 	public void mostrarNumeroRegistrosTabla(JLabel la, int numeroRegistros) {
@@ -239,21 +249,38 @@ public class frmCrudCampeonato extends JFrame implements ActionListener, MouseLi
 		c.setFecha(Date.valueOf(fecha));
 		mod.insertaCampeonato(c);
 		listadoCampeonato(mod.listaCampeonato());
-		mostrarNumeroRegistrosTabla(lblNRegistros, mod.listaCampeonato().size());
+		
 	}
-	
-	public void listadoCampeonato(List<Campeonato1> list) {
-		List<Campeonato1> data = list;
-
+/*
+	public void listadoCampeonato() {
+		List<Campeonato1> data =mod.listaCampeonato();
+		table.setDefaultRenderer(getClass(), null);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
-
+		mostrarNumeroRegistrosTabla(lblNRegistros, data.size());
+//Mdel dtm poner datos alas cabeceras
 		for (Campeonato1 c : data) {
 			Object[] fila = { c.getIdcampeonato(), c.getDescripcion(), c.getAnio(),
 					Util.fechaFormatoDiaMesAnio(c.getFecha()) };
+
 			dtm.addRow(fila);
 		}
 		dtm.fireTableDataChanged();
+	}*/
+	public void listadoCampeonato(List<Campeonato1> list) {
+		List<Campeonato1> data =list;
+		table.setDefaultRenderer(getClass(), null);
+		DefaultTableModel dtma = (DefaultTableModel) table.getModel();
+		dtma.setRowCount(0);
+		mostrarNumeroRegistrosTabla(lblNRegistros, data.size());
+//Mdel dtm poner datos alas cabeceras
+		for (Campeonato1 c : data) {
+			Object[] fila = { c.getIdcampeonato(), c.getDescripcion(), c.getAnio(),
+					Util.fechaFormatoDiaMesAnio(c.getFecha()) };
+
+			dtma.addRow(fila);
+		}
+		dtma.fireTableDataChanged();
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -337,10 +364,10 @@ public class frmCrudCampeonato extends JFrame implements ActionListener, MouseLi
 
 	protected void do_txtFiltro_keyReleased(KeyEvent e) {
 
-		String [] tipo= {"nombre", "anio"};
+		String[] tipo = { "nombre", "anio" };
 		String nombre = tipo[cboFiltro.getSelectedIndex()];
 		String busqueda = txtFiltro.getText().trim();
-		
+
 		listadoCampeonato(mod.listaFiltro(nombre, busqueda));
 
 	}
@@ -360,10 +387,9 @@ public class frmCrudCampeonato extends JFrame implements ActionListener, MouseLi
 			String fechaInicio = Util.fechaFormatoMySQl(txtFechaInicio);
 			String fechaFin = Util.fechaFormatoMySQl(txtFechaFin);
 			listadoFechas = mod.listaFiltroBetween(fechaInicio, fechaFin);
-			int numeroRegistrosObtenidos = listadoFechas.size();
+		
 			listadoCampeonato(listadoFechas);
-			mostrarNumeroRegistrosTabla(lblNRegistros, numeroRegistrosObtenidos);
-
+			
 		} else {
 			Util.mensajeExito("Revisar la fechas pueden estar vacias ");
 		}
@@ -375,14 +401,14 @@ public class frmCrudCampeonato extends JFrame implements ActionListener, MouseLi
 //		System.out.println("SELECT idCampeonato,nombre ,anio, fecha FROM campeonato_one where fecha BETWEEN '"+fechaInicio+"'" +" and"+" '"+fechaFin+"' ");
 
 	}
+
 	protected void do_btnResetFechasYTabla_actionPerformed(ActionEvent e) {
 		limpiarCalendar(txtFechaInicio);
 		limpiarCalendar(txtFechaFin);
-		List<Campeonato1> list= mod.listaCampeonato();
-		int numeroRegistros= list.size(); 
-		listadoCampeonato(list);
-		mostrarNumeroRegistrosTabla(lblNRegistros, numeroRegistros);
+	
 		
+		listadoCampeonato(mod.listaCampeonato());
 		
+
 	}
 }

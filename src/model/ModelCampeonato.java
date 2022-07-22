@@ -10,7 +10,7 @@ import java.util.List;
 
 import Utilidad.MiConexion;
 import Utilidad.Util;
-import entidad.Campeonato;
+import entidad.LIbro;
 import entidad.Campeonato1;
 
 public class ModelCampeonato {
@@ -44,7 +44,7 @@ public class ModelCampeonato {
 
 	}
 
-	public int actualizaCampeonato(Campeonato obj) {
+	public int actualizaCampeonato(LIbro obj) {
 		int actualizados = -1;
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -73,8 +73,8 @@ public class ModelCampeonato {
 		return actualizados;
 	}
 
-	public List<Campeonato> listaCampeonato() {
-		List<Campeonato> data = new ArrayList<Campeonato>();
+	public List<LIbro> listaCampeonato() {
+		List<LIbro> data = new ArrayList<LIbro>();
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -83,10 +83,10 @@ public class ModelCampeonato {
 			String sql = "SELECT c.idCampeonato,c.nombre ,c.año FROM campeonato c";
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
-			Campeonato c = null;
+			LIbro c = null;
 			while (rs.next()) {
 
-				c = new Campeonato();
+				c = new LIbro();
 				c.setIdcampeonato(rs.getInt("idCampeonato"));
 				c.setDescripcion(rs.getString("nombre"));
 				c.setAnio(rs.getInt("año"));
@@ -107,8 +107,8 @@ public class ModelCampeonato {
 		return data;
 	}
 	
-	public List<Campeonato> listaFiltro(String campo, String texto) {
-		List<Campeonato> data = new ArrayList<Campeonato>();
+	public List<LIbro> listaFiltro(String campo, String texto) {
+		List<LIbro> data = new ArrayList<LIbro>();
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -120,10 +120,10 @@ public class ModelCampeonato {
 			String sql = "SELECT idCampeonato,nombre ,año FROM campeonato where "+campo+" LIKE '%"+texto+"%'";
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
-			Campeonato c = null;
+			LIbro c = null;
 			while (rs.next()) {
 
-				c = new Campeonato();
+				c = new LIbro();
 				c.setIdcampeonato(rs.getInt("idCampeonato"));
 				c.setDescripcion(rs.getString("nombre"));
 				c.setAnio(rs.getInt("año"));
@@ -145,8 +145,8 @@ public class ModelCampeonato {
 	}
 	
 	
-	public List<Campeonato> listaFiltroBetween(int fecha, int fecha1) {
-		List<Campeonato> data = new ArrayList<Campeonato>();
+	public List<LIbro> listaFiltroBetween(int fecha, int fecha1) {
+		List<LIbro> data = new ArrayList<LIbro>();
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -156,10 +156,10 @@ public class ModelCampeonato {
 			String sql = "SELECT idCampeonato,nombre ,año FROM campeonato where año BETWEEN "+fecha+" and "+fecha1+" ";
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
-			Campeonato c = null;
+			LIbro c = null;
 			while (rs.next()) {
 
-				c = new Campeonato();
+				c = new LIbro();
 				c.setIdcampeonato(rs.getInt("idCampeonato"));
 				c.setDescripcion(rs.getString("nombre"));
 				c.setAnio(rs.getInt("año"));

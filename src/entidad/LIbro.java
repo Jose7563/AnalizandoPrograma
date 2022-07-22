@@ -1,6 +1,6 @@
 package entidad;
 
-public class Campeonato {
+public class LIbro {
 
 	private int idcampeonato;
 	private int anio;
